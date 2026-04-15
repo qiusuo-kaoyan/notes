@@ -1,7 +1,7 @@
 // kaoyanReview.js - 考研错题复习看板脚本 (V3 - 最终美化版)
 
 // --- 配置区 ---
-const targetFolder = "1. 控制科学备考/1. Math";
+const targetFolder = "1. Math";
 const difficultyConfig = {
     1: "⭐", 2: "⭐⭐", 3: "⭐⭐⭐", 4: "⭐⭐⭐⭐", 5: "🔥🔥🔥🔥🔥"
 };
