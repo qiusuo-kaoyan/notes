@@ -73,7 +73,7 @@
 ## 👨‍✈️ 舰长名录
 
 ### Gen-1 (26届)
-- [@第一代舰长](https://github.com/你的用户名) — 启航者
+- [@LeoooKang](https://github.com/LeoooKang) — 启航者
 
 ### Gen-2 (27届)
 - *虚位以待*
