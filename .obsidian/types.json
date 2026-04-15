@@ -1,0 +1,21 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "练习册": "text",
+    "题目编号": "number",
+    "属性": "text",
+    "done_date": "date",
+    "review_date": "date",
+    "id": "number",
+    "difficulty": "number",
+    "knowledge_points": "multitext",
+    "last_reviewed": "date",
+    "importance": "number",
+    "URL": "multitext",
+    "core_method": "multitext",
+    "exam_ID": "number",
+    "Exam_date": "date"
+  }
+}

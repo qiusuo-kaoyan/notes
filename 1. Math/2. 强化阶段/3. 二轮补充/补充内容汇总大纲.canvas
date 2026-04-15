@@ -1,0 +1,39 @@
+{
+	"nodes":[
+		{
+			"id":"8f258203210f7c36",
+			"type":"text",
+			"text":"# 无穷级数",
+			"styleAttributes":{"textAlign":"center"},
+			"x":120,
+			"y":-540,
+			"width":300,
+			"height":120
+		},
+		{
+			"id":"c69a682cacdf2168",
+			"type":"text",
+			"text":"## 6. 阿贝尔定理",
+			"styleAttributes":{"textAlign":"center"},
+			"x":640,
+			"y":-540,
+			"width":380,
+			"height":120
+		},
+		{
+			"id":"5b35b1ce9bbbf3bb",
+			"type":"text",
+			"text":"",
+			"styleAttributes":{"textAlign":"center"},
+			"x":760,
+			"y":-280,
+			"width":260,
+			"height":60
+		}
+	],
+	"edges":[],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}

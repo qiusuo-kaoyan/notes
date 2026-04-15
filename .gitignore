@@ -1,0 +1,48 @@
+# ============================================================
+# Obsidian 考研笔记库 - Git 忽略规则
+# 目标：只保留 Markdown、图片、Canvas 和必要配置
+# ============================================================
+
+# --- 1. Obsidian 自动生成的垃圾文件 ---
+.trash/
+.hinote/
+
+# 历史 workspace 文件（Obsidian 会不断生成带数字的历史记录）
+.obsidian/workspace *.json
+.obsidian/workspace(*.json
+.obsidian/workspaces.json
+
+# --- 2. 大文件 / 版权敏感文件 ---
+# 所有 PDF 讲义、教材、解析册（防止版权风险）
+*.pdf
+
+# 压缩包（之前有一个 181MB 的 zip）
+*.zip
+*.rar
+*.7z
+
+# Office 文档（PPT、Word 等）
+*.pptx
+*.ppt
+*.docx
+*.doc
+
+# --- 3. 系统文件 ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- 4. 日志与临时文件 ---
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# --- 5. 第三方 Obsidian 插件 ---
+# 插件文件是第三方代码，体积大（~37MB），且可通过 community-plugins.json 重建
+.obsidian/plugins/
+
+# --- 6. 其他插件缓存（如有需要可补充） ---
+# .obsidian/plugins/xxx/cache/

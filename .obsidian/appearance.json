@@ -1,0 +1,11 @@
+{
+  "cssTheme": "Blue Topaz",
+  "baseFontSizeAction": true,
+  "baseFontSize": 22,
+  "enabledCssSnippets": [
+    "笔记预览限制范围",
+    "Contextual Typography"
+  ],
+  "theme": "system",
+  "showRibbon": true
+}
