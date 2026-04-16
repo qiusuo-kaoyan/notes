@@ -9,6 +9,7 @@
 
 # 历史 workspace 文件（Obsidian 会不断生成带数字的历史记录）
 .obsidian/workspace.json
+.obsidian/workspace-mobile.json
 .obsidian/workspace *.json
 .obsidian/workspace(*.json
 .obsidian/workspaces.json
