@@ -46,5 +46,9 @@ desktop.ini
 # 插件文件是第三方代码，体积大（~37MB），且可通过 community-plugins.json 重建
 .obsidian/plugins/
 
-# --- 6. 其他插件缓存（如有需要可补充） ---
+# --- 6. 附件目录 ---
+# 工具箱等目录下的原始图片附件（体积大，已在文章中有描述）
+attachment/
+
+# --- 7. 其他插件缓存（如有需要可补充） ---
 # .obsidian/plugins/xxx/cache/
