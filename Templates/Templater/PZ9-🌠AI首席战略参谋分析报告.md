@@ -10,19 +10,18 @@ tags:
 
 
 <div style="background-color: rgba(var(--color-purple-rgb), 0.1); border-left: 5px solid var(--color-purple); padding: 15px 20px; border-radius: 8px; margin: 1.5em 0;">
-<strong style="color: var(--text-accent-2); font-size: 1.2em;">首席架构师，欢迎来到您的周度航行指挥室。</strong><br>
-<span style="color: var(--text-normal);">本周的原始情报已上传。您的首席战略参谋正在进行全息分析。分析报告将在此呈现，请您审阅并做出最终战略决策。</span>
+<strong style="color: var(--text-accent-2); font-size: 1.2em;">舰长，欢迎来到周度航行指挥室。</strong><br>
+<span style="color: var(--text-normal);">本周的学习数据已汇总，下面是基于笔记生成的数据分析报告，供你复盘参考。</span>
 </div>
 
 ---
-## 📊 Part 1: 本周战役自动化数据报告 (Automated Battle Report)
-> [!TIP] 这是由系统生成的、最客观的原始数据镜像，是所有后续分析的基石。
+## 📊 Part 1: 本周学习数据概览
+> [!TIP] 这部分根据你本周的笔记自动生成，是后续复盘的事实基础。
 > <!-- 注释：此部分将由Dataview插件自动渲染，无需AI或您手动填写。-->
 
 ```dataviewjs
 // --- 最终毕业版: v-XV-Priority-Scheduling (优先级调度版) ---
-// 首席架构师 & 首席战略参谋 联合署名:
-// 本次升级为周度复盘装载了三级价值排序系统，确保您的战略复盘，能聚焦于最高价值的战果与战损之上。
+// 本次升级装载了三级价值排序系统，确保复盘能聚焦于最高价值的产出与问题。
 
 // --- I. 全局配置区 (Global Configuration) ---
 const CONFIG = {
@@ -63,7 +62,7 @@ const newTactics = newCreations.where(p => p.type?.trim() === "战术卡片");
 const dailyLogsThisWeek = dv.pages(`"${CONFIG.dailyLogFolder}"`).where(p => { const logDate = p.file.day || (p.date ? dv.date(p.date) : null); return p.type === "日记" && logDate && logDate >= weekStart && logDate <= weekEnd; }).sort(p => p.file.day || p.date, 'asc');
 
 // --- V. 自动化战报渲染 (Automated Battle-Report Rendering) ---
-dv.header(4, "📈 本周核心战果仪表盘");
+dv.header(4, "📈 本周核心数据");
 const container = dv.container.createEl('div', { cls: 'dashboard-container' });
 function createCard(title, value, unit, icon, color) { const card = container.createEl('div', { cls: 'dashboard-card', attr: {style: `border-left-color: ${color};`} }); const iconEl = card.createEl('div', { cls: 'card-icon', text: icon }); const contentEl = card.createEl('div', { cls: 'card-content' }); contentEl.createEl('div', { cls: 'card-value', text: value }); contentEl.createEl('div', { cls: 'card-title', text: `${title} (${unit})` }); }
 createCard("新增错题", mistakesThisWeek.length, "道", "🔥", "var(--color-red)");
@@ -76,13 +75,13 @@ createCard("新建战术卡片", newTactics.length, "张", "⚔️", "var(--colo
 // --- [v-XV UPGRADE] “本周战功墙”渲染模块 ---
 const itemsDoneThisWeek = notesDoneThisWeek;
 if (itemsDoneThisWeek.length > 0) {
-    dv.header(4, "📝 本周战功墙 (所有题目与例题)");
+    dv.header(4, "📝 本周已做题目与例题");
 
     const newItemsThisWeek = itemsDoneThisWeek.where(p => ["错题", "已做", "未做", "待剖析"].includes(p.status?.trim()));
     const masteredItemsThisWeek = itemsDoneThisWeek.where(p => ["掌握", "已建模", "可迁移"].includes(p.status?.trim()));
 
     if (newItemsThisWeek.length > 0) {
-        dv.paragraph(`**🔥 新增战果 (待消化) (${newItemsThisWeek.length}项)**`);
+        dv.paragraph(`**🔥 新增待消化 (${newItemsThisWeek.length}项)**`);
         dv.table(
             ["条目", "类型", "来源", "重要性", "难度"],
             newItemsThisWeek
@@ -103,7 +102,7 @@ if (itemsDoneThisWeek.length > 0) {
     }
 
     if (masteredItemsThisWeek.length > 0) {
-        dv.paragraph(`**✅ 本周掌握 (胜利果实) (${masteredItemsThisWeek.length}项)**`);
+        dv.paragraph(`**✅ 本周已掌握 (${masteredItemsThisWeek.length}项)**`);
          dv.table(
             ["条目", "类型", "来源", "重要性", "难度"],
             masteredItemsThisWeek
@@ -128,7 +127,7 @@ if (itemsDoneThisWeek.length > 0) {
 
 
 // --- 军备与日志回顾模块 (保持不变) ---
-if (newCreations.length > 0) { dv.header(4, "💡 本周军备扩充报告 (新增知识资产)"); dv.list(newCreations.map(p => { let emoji = p.type === "知识枢纽" ? "🧠" : (p.type === "深度解析" ? "💎" : "⚔️"); return `${emoji} ${p.file.link}`; })); }
+if (newCreations.length > 0) { dv.header(4, "💡 本周新增知识资产"); dv.list(newCreations.map(p => { let emoji = p.type === "知识枢纽" ? "🧠" : (p.type === "深度解析" ? "💎" : "⚔️"); return `${emoji} ${p.file.link}`; })); }
 if (dailyLogsThisWeek.length > 0) {
     dv.header(4, "📜 本周舰长航行日志回顾");
     const logsContainer = dv.container.createEl('div', {cls: "logs-container"});
@@ -151,12 +150,12 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
 ```
 
 ---
-## 🧠 Part 2: AI首席战略参谋分析报告 (AI-Generated Strategic Analysis)
+## 🧠 Part 2: 本周复盘分析 (AI-Generated Analysis)
 
-> [!NOTE] 以下内容由AI根据您本周提供的所有情报自动生成，旨在为您揭示隐藏的模式、诊断潜在的问题，并提出数据驱动的建议。
+> [!NOTE] 以下内容由 AI 根据你本周的笔记生成，供你参考。
 
-### **Part A: 舰长精神状态与续航能力评估**
-#### 1. **本周情绪曲线与压力来源识别**
+### **Part A: 本周精神状态与学习状态评估**
+#### 1. **本周情绪与压力来源**
 <!-- 
     AI分析填充区
     注释：AI将在此处分析您的每日日志，提取情绪模式、识别压力来源。
@@ -165,7 +164,7 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
     - 核心压力源诊断：1. 生理节律失调... 2. XX学科魔咒... 3. 时间焦虑...
 -->
 
-#### 2. **状态调整与续航能力优化建议**
+#### 2. **状态调整建议**
 <!-- 
     AI分析填充区
     注释：AI将根据压力源诊断，提供具体的、可执行的调整建议。
@@ -175,8 +174,8 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
     - 守住XX阵地...
 -->
 
-### **Part B: 本周学习焦点与知识资产增长报告**
-#### 1. **本周主攻方向与学习重心**
+### **Part B: 本周学习焦点与知识产出**
+#### 1. **本周主攻方向**
 <!-- 
     AI分析填充区
     注释：AI将在此处扫描您本周的所有知识笔记，总结出学习的核心领域与重心。
@@ -185,7 +184,7 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
     - 学习重心：从“计算”转向“证明与分析”...
 -->
 
-#### 2. **本周智力资产盘点**
+#### 2. **本周知识产出盘点**
 <!-- 
     AI分析填充区
     注释：AI将在此处量化您本周的知识产出。
@@ -195,7 +194,7 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
 -->
 
 ### **Part C: 核心问题诊断**
-#### 1. **防御体系缺口识别**
+#### 1. **知识漏洞识别**
 <!-- 
     AI分析填充区
     注释：AI将在此处交叉对比日志和错题，找出您的知识性或习惯性弱点。
@@ -213,7 +212,7 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
     - 您攻克难题的效率与您的精神状态呈现出负相关...
 -->
 ---
-## ✍️ Part 3: 灵魂深处的战略复盘 (AI初稿，待您审阅)
+## ✍️ Part 3: 深度复盘 (AI初稿，待你审阅)
 > [!NOTE] 以下内容由AI根据上述分析，为您撰写。请您在此基础上进行修改、补充，形成您最终的战略思考。
 
 #### 1. **本周的“决定性胜利”是什么？**
@@ -243,7 +242,7 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
 -->
 
 ---
-## 🎯 Part 4: 擘画下周的航行蓝图 (AI建议，待您决策)
+## 🎯 Part 4: 下周计划 (AI建议，待你决策)
 > [!TODO] 复盘的终点，是行动的起点。请您基于以上分析，最终确定下周的作战计划。
 
 #### 1. **下周的主攻目标 (Primary Target)**
@@ -274,6 +273,6 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
 -->
 
 <div style="background-color: rgba(var(--color-yellow-rgb), 0.1); border-left: 5px solid var(--color-yellow); padding: 12px 15px; border-radius: 6px; margin: 1.5em 0;">
-<strong style="color: var(--text-normal);">首席架构师，AI分析报告已呈递。</strong><br>
-<span style="color: var(--text-normal);">您已洞察过去，亦可擘画未来。请您审阅并下达最终指令。明日的黎明到来之时，我们将再次扬帆，以星辰为目标，破浪前行。</span>
+<strong style="color: var(--text-normal);">舰长，本周复盘报告已生成完毕。</strong><br>
+<span style="color: var(--text-normal);">数据只是参考，最终的判断和行动取决于你。下周继续加油。</span>
 </div>

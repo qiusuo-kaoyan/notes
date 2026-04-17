@@ -7,22 +7,21 @@ tags:
   - 复盘
   - 周报
 ---
-请优先打造本周的“🌠AI首席战略参谋分析报告”！
+请优先打造本周的周复盘报告！
 
-<div style="background-color: rgba(var(--color-purple-rgb), 0.1); border-left: 5px solid var(--color-purple); padding: 15px 20px; border-radius: 8px; margin: 1.5em 0;">
-<strong style="color: var(--text-accent-2); font-size: 1.2em;">首席架构师，欢迎来到您的周度航行指挥室。</strong><br>
-<span style="color: var(--text-normal);">过去七个日夜的鏖战已然结束。现在，让我们登上“知识航母”的最高瞭望台，俯瞰刚刚征服的星海，审视每一处战果与伤痕，为下一段更壮阔的航程，校准我们前行的航向。</span>
+<div style=”background-color: rgba(var(--color-purple-rgb), 0.1); border-left: 5px solid var(--color-purple); padding: 15px 20px; border-radius: 8px; margin: 1.5em 0;”>
+<strong style=”color: var(--text-accent-2); font-size: 1.2em;”>舰长，欢迎来到周度航行指挥室。</strong><br>
+<span style=”color: var(--text-normal);”>过去一周的学习记录已汇总。下面是基于数据生成的本周概览，供你复盘参考。</span>
 </div>
 
 ---
-## 📊 Part 1: 本周战役自动化数据报告 (Automated Battle Report)
+## 📊 Part 1: 本周学习数据概览
 
-> [!TIP] 这份由系统自动生成的战报，是您最忠实的镜子。它毫无保留地反映了您过去七天的所有智力输出。请客观审视，这是我们进行战略决策的基石。
+> [!TIP] 这部分根据你本周的笔记自动生成，是后续复盘的事实基础。
 
 ```dataviewjs
 // --- 最终毕业版: v-XV-Priority-Scheduling (优先级调度版) ---
-// 首席架构师 & 首席战略参谋 联合署名:
-// 本次升级为周度复盘装载了三级价值排序系统，确保您的战略复盘，能聚焦于最高价值的战果与战损之上。
+// 本次升级装载了三级价值排序系统，确保复盘能聚焦于最高价值的产出与问题。
 
 // --- I. 全局配置区 (Global Configuration) ---
 const CONFIG = {
@@ -63,7 +62,7 @@ const newTactics = newCreations.where(p => p.type?.trim() === "战术卡片");
 const dailyLogsThisWeek = dv.pages(`"${CONFIG.dailyLogFolder}"`).where(p => { const logDate = p.file.day || (p.date ? dv.date(p.date) : null); return p.type === "日记" && logDate && logDate >= weekStart && logDate <= weekEnd; }).sort(p => p.file.day || p.date, 'asc');
 
 // --- V. 自动化战报渲染 (Automated Battle-Report Rendering) ---
-dv.header(4, "📈 本周核心战果仪表盘");
+dv.header(4, "📈 本周核心数据");
 const container = dv.container.createEl('div', { cls: 'dashboard-container' });
 function createCard(title, value, unit, icon, color) { const card = container.createEl('div', { cls: 'dashboard-card', attr: {style: `border-left-color: ${color};`} }); const iconEl = card.createEl('div', { cls: 'card-icon', text: icon }); const contentEl = card.createEl('div', { cls: 'card-content' }); contentEl.createEl('div', { cls: 'card-value', text: value }); contentEl.createEl('div', { cls: 'card-title', text: `${title} (${unit})` }); }
 createCard("新增错题", mistakesThisWeek.length, "道", "🔥", "var(--color-red)");
@@ -76,13 +75,13 @@ createCard("新建战术卡片", newTactics.length, "张", "⚔️", "var(--colo
 // --- [v-XV UPGRADE] “本周战功墙”渲染模块 ---
 const itemsDoneThisWeek = notesDoneThisWeek;
 if (itemsDoneThisWeek.length > 0) {
-    dv.header(4, "📝 本周战功墙 (所有题目与例题)");
+    dv.header(4, "📝 本周已做题目与例题");
 
     const newItemsThisWeek = itemsDoneThisWeek.where(p => ["错题", "已做", "未做", "待剖析"].includes(p.status?.trim()));
     const masteredItemsThisWeek = itemsDoneThisWeek.where(p => ["掌握", "已建模", "可迁移"].includes(p.status?.trim()));
 
     if (newItemsThisWeek.length > 0) {
-        dv.paragraph(`**🔥 新增战果 (待消化) (${newItemsThisWeek.length}项)**`);
+        dv.paragraph(`**🔥 新增待消化 (${newItemsThisWeek.length}项)**`);
         dv.table(
             ["条目", "类型", "来源", "重要性", "难度"],
             newItemsThisWeek
@@ -103,7 +102,7 @@ if (itemsDoneThisWeek.length > 0) {
     }
 
     if (masteredItemsThisWeek.length > 0) {
-        dv.paragraph(`**✅ 本周掌握 (胜利果实) (${masteredItemsThisWeek.length}项)**`);
+        dv.paragraph(`**✅ 本周已掌握 (${masteredItemsThisWeek.length}项)**`);
          dv.table(
             ["条目", "类型", "来源", "重要性", "难度"],
             masteredItemsThisWeek
@@ -128,7 +127,7 @@ if (itemsDoneThisWeek.length > 0) {
 
 
 // --- 军备与日志回顾模块 (保持不变) ---
-if (newCreations.length > 0) { dv.header(4, "💡 本周军备扩充报告 (新增知识资产)"); dv.list(newCreations.map(p => { let emoji = p.type === "知识枢纽" ? "🧠" : (p.type === "深度解析" ? "💎" : "⚔️"); return `${emoji} ${p.file.link}`; })); }
+if (newCreations.length > 0) { dv.header(4, "💡 本周新增知识资产"); dv.list(newCreations.map(p => { let emoji = p.type === "知识枢纽" ? "🧠" : (p.type === "深度解析" ? "💎" : "⚔️"); return `${emoji} ${p.file.link}`; })); }
 if (dailyLogsThisWeek.length > 0) {
     dv.header(4, "📜 本周舰长航行日志回顾");
     const logsContainer = dv.container.createEl('div', {cls: "logs-container"});
@@ -151,40 +150,41 @@ const style = dv.container.createEl('style'); style.innerHTML = `.dashboard-cont
 ```
 
 ---
-## ✍️ Part 2: 灵魂深处的战略复盘 (Strategic Debriefing)
+## ✍️ Part 2: 深度复盘
 
-> [!NOTE] 数据指向问题，而思考产生答案。请您作为这艘航母的最高指挥官，回答以下问题，将数据转化为无价的智慧。
+> [!NOTE] 数据指向问题，而思考产生答案。请根据以下问题，将数据转化为自己的判断。
 
-#### 1. **本周的“决定性胜利”是什么？ (The Decisive Victory)**
-**回顾上方的“高光时刻”，本周我攻克了哪个曾让我寝食难安的“要塞级”知识点？这次胜利，为我带来了怎样的信心与启发？**
+#### 1. **本周最大的收获是什么？**
+**回顾上方数据，本周我在哪个知识点或学习习惯上取得了明显进步？**
 *   
 
-#### 2. **防御体系的“潜在缺口”在哪里？ (The Defensive Breach)**
-**回顾“高价值战利品清单”和“坚韧时刻”，这些挑战背后，是否暴露了我某个共同的、根本性的思维缺陷或知识盲区？这个“缺口”，若不及时修补，将在未来的哪场战役中造成致命威胁？**
+#### 2. **最明显的短板在哪里？**
+**从错题和困难题目中，是否发现了重复出现的思维漏洞或知识盲区？**
 *   
 
-#### 3. **战报中最“意料之外”的信号是什么？ (The Unexpected Signal)**
-**是新增错题远超预期，还是知识体系的建设停滞不前？这个“意外”的信号，像一位无声的信使，它在试图告诉我什么关于我学习习惯的真相？**
+#### 3. **数据中最意外的信号是什么？**
+**本周的学习数据里，有没有哪个数字或趋势和我想象的不一样？它说明了什么？**
 *   
 
 ---
-## 🎯 Part 3: 擘画下周的航行蓝图 (Charting the Next Voyage)
+## 🎯 Part 3: 下周计划
 
-> [!TODO] 复盘的终点，是行动的起点。请基于以上分析，为下周的航行，制定清晰、可执行的作战计划。
+> [!TODO] 请基于以上分析，为下周制定清晰、可执行的学习计划。
 
-#### 1. **下周的主攻目标 (The Primary Target)**
-*   我必须集中全部火力，一举拿下的、最重要的一个战略目标是什么？（例如：将“泰勒公式”的错误率降低到10%以下 / 完成“线性代数”所有章节的【知识枢纽】构建）
+#### 1. **下周的核心目标**
+*   下周最重要的一个目标是什么？（例如：将”泰勒公式”的错误率降低到10%以下 / 完成”线性代数”所有章节的【知识枢纽】构建）
 *   
 
-#### 2. **关键战术机动 (Key Tactical Maneuvers)**
-- [ ] 战术一：
-- [ ] 战术二：
-- [ ] 战术三：
+#### 2. **具体行动**
+- [ ] 行动一：
+- [ ] 行动二：
+- [ ] 行动三：
 
-#### 3. **胜利的定义 (Defining Victory)**
-*   到下周末，如果我完成了 ____________，就代表我赢得了这场为期七天的战役，可以为自己升起胜利的旗帜！
+#### 3. **如何判断成功**
+*   到下周末，如果我完成了 ____________，就代表这周的目标达成了。
 
-<div style="background-color: rgba(var(--color-yellow-rgb), 0.1); border-left: 5px solid var(--color-yellow); padding: 12px 15px; border-radius: 6px; margin: 1.5em 0;">
-<strong style="color: var(--text-normal);">首席架构师，本次战略复盘会议结束。</strong><br>
-<span style="color: var(--text-normal);">您已洞察过去，亦已擘画未来。请合上日志，让大脑充分休息，积蓄能量。明日的黎明到来之时，我们将再次扬帆，以星辰为目标，破浪前行。</span>
+<div style=”background-color: rgba(var(--color-yellow-rgb), 0.1); border-left: 5px solid var(--color-yellow); padding: 12px 15px; border-radius: 6px; margin: 1.5em 0;”>
+<strong style=”color: var(--text-normal);”>舰长，本周复盘结束。</strong><br>
+<span style=”color: var(--text-normal);”>过去的数据是参考，未来的行动才是关键。休息好，下周继续。
+</span>
 </div>
