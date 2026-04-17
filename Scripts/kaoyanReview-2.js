@@ -62,24 +62,17 @@ function getLastReviewDate(p) {
 }
 
 // ===================================================================
-// 核心渲染
+// 渲染基础设施
 // ===================================================================
-function renderKaoyanDashboard() {
-  const today = dv.date('today');
+function safeRender(name, fn, ...args) {
+  try {
+    fn(...args);
+  } catch (e) {
+    dv.paragraph(`🔴 **${name} 渲染失败**: ${e.message}`);
+  }
+}
 
-  // --- [阶段二] 性能优化：仅扫描 2 次 vault ---
-  const allPages = dv.pages();
-  const mathPages = allPages.where(p => p.file.path.startsWith(CONFIG.mathNotesFolder));
-
-  const allActionableItems = mathPages.where(p => p.type?.trim() === "题目" || p.type?.trim() === "例题");
-  const allProblems = allActionableItems.where(p => p.type?.trim() === "题目");
-  const allMistakes = allProblems.where(p => p.status?.trim() === "错题");
-  const allExemplars = allActionableItems.where(p => p.type?.trim() === "例题");
-  const pendingExemplars = allExemplars.where(p => p.status?.trim() === "待剖析");
-  const mistakeCount = allMistakes.length;
-  const pendingExemplarCount = pendingExemplars.length;
-
-  // --- 视觉警报系统 ---
+function renderHealthBarAndTitle(mistakeCount) {
   const currentAlert = CONFIG.alertTiers.find(tier => mistakeCount >= tier.threshold)
     || CONFIG.alertTiers[CONFIG.alertTiers.length - 1];
   let healthPercentage = Math.max(0, 100 - (mistakeCount / CONFIG.maxMistakesForHealthBar * 100));
@@ -100,28 +93,9 @@ function renderKaoyanDashboard() {
     <span class="title-text">考研数学复习仪表盘</span>
     <span class="title-status" style="color: ${currentAlert.color};">${currentAlert.text}</span>
   `;
+}
 
-  // --- 今日待复习计算 ---
-  const reviewMistakes = allMistakes.where(p => {
-    const rd = dv.date(p.review_date);
-    return rd && rd <= today;
-  });
-  const reviewToday = reviewMistakes.concat(pendingExemplars);
-
-  // --- [阶段四] 遗忘预警：基于 last_reviewed / review_date ---
-  const staleMistakes = allMistakes.where(p => {
-    const lastReviewed = getLastReviewDate(p);
-    if (!lastReviewed) return false;
-    return today - lastReviewed > dv.duration(CONFIG.staleAlertDays + " days");
-  });
-  const staleExemplars = pendingExemplars.where(p => {
-    const lastReviewed = getLastReviewDate(p);
-    if (!lastReviewed) return false;
-    return today - lastReviewed > dv.duration(CONFIG.staleAlertDays + " days");
-  });
-  const staleItems = staleMistakes.concat(staleExemplars);
-
-  // --- 数据卡片 ---
+function renderDataCards(mistakeCount, pendingExemplarCount, reviewToday, staleItems) {
   const container = dv.container.createEl('div', { cls: 'dashboard-container' });
   container.createEl('div', { cls: 'dashboard-card' }).innerHTML = `
     <div class="card-title">🚨 当前总错题</div>
@@ -139,10 +113,14 @@ function renderKaoyanDashboard() {
     <div class="card-title">🧠 遗忘预警</div>
     <div class="card-value">${staleItems.length}</div>
     <div class="card-footer">项(&gt;${CONFIG.staleAlertDays}天)</div>`;
+}
 
-  // --- 模块 1: 章节掌握度分析 ---
+// 模块 1: 章节掌握度分析
+function renderModule1_ChapterMastery(allProblems) {
   dv.header(3, "📊 章节掌握度分析");
-  dv.paragraph("> [!TIP] 红色和橙色代表高错误率章节，请优先关注！点击章节名可直接跳转。");
+  dv.paragraph(
+    "> [!TIP] 红色和橙色代表高错误率章节，请优先关注！点击章节名可直接跳转。"
+  );
 
   const masteryByChapter = allProblems
     .groupBy(p => extractChapterName(p.chapter))
@@ -158,12 +136,17 @@ function renderKaoyanDashboard() {
       if (g.rows.length > 0) {
         const firstNoteChapter = g.rows[0].chapter;
         if (firstNoteChapter && firstNoteChapter.path) {
-          chapterDisplay = `<a href="${firstNoteChapter.path}" data-href="${firstNoteChapter.path}" class="internal-link" target="_blank" rel="noopener" style="color: ${barColor} !important; font-weight: 500;">${g.key}</a>`;
+          const linkStyle = `color: ${barColor} !important; font-weight: 500;`;
+          chapterDisplay = `<a href="${firstNoteChapter.path}" ` +
+            `data-href="${firstNoteChapter.path}" class="internal-link" ` +
+            `target="_blank" rel="noopener" style="${linkStyle}">${g.key}</a>`;
         }
       }
       return {
         chapterDisplay: chapterDisplay,
-        masteryBar: `<div class="mastery-bar-container"><div class="mastery-bar" style="width:${100 - errorRate}%; background-color:${barColor};"></div></div>`,
+        masteryBar: `<div class="mastery-bar-container">` +
+          `<div class="mastery-bar" style="width:${100 - errorRate}%; background-color:${barColor};">` +
+          `</div></div>`,
         stats: `${mistakes} / ${total}`,
         errorRate: `${errorRate}%`
       };
@@ -176,29 +159,41 @@ function renderKaoyanDashboard() {
       masteryByChapter.map(m => [m.chapterDisplay, m.masteryBar, m.stats, m.errorRate])
     );
   } else {
-    dv.paragraph("> [!INFO] 暂无章节数据。请检查 `1. Math` 下的笔记是否包含 `chapter` 字段。");
-  }
-
-  // --- 模块 2: 待剖析经典例题清单 ---
-  if (pendingExemplars.length > 0) {
-    dv.header(3, "🔬 待剖析经典例题清单");
-    dv.paragraph("> [!TIP] 这些是你捕获的、尚未完成剖析的例题，请尽快建模！");
-    dv.table(
-      ["例题", "来源", "待剖析核心方法"],
-      pendingExemplars.sort(p => p.file.cday, 'asc').map(p => [
-        p.file.link,
-        p.source || "N/A",
-        p.method_exemplified || "待关联"
-      ])
+    dv.paragraph(
+      "> [!INFO] 暂无章节数据。请检查 `1. Math` 下的笔记是否包含 `chapter` 字段。"
     );
   }
+}
 
-  // --- 模块 3: 错题本 (按知识点聚合) ---
+// 模块 2: 待剖析经典例题清单
+function renderModule2_PendingExemplars(pendingExemplars) {
+  dv.header(3, "🔬 待剖析经典例题清单");
+  if (pendingExemplars.length === 0) {
+    dv.paragraph("> [!INFO] 暂无待剖析例题。请继续保持。");
+    return;
+  }
+  dv.paragraph(
+    "> [!TIP] 这些是你捕获的、尚未完成剖析的例题，请尽快建模！"
+  );
+  dv.table(
+    ["例题", "来源", "待剖析核心方法"],
+    pendingExemplars.sort(p => p.file.cday, 'asc').map(p => [
+      p.file.link,
+      p.source || "N/A",
+      p.method_exemplified || "待关联"
+    ])
+  );
+}
+
+// 模块 3: 错题本 (按知识点聚合)
+function renderModule3_MistakesByTopic(allMistakes) {
   dv.header(3, "🎯 错题本 (按知识点聚合)");
   const mistakesByIndividualTopic = {};
   allMistakes.forEach(note => {
     const kps = note.knowledge_points
-      ? (Array.isArray(note.knowledge_points) ? note.knowledge_points : [note.knowledge_points])
+      ? (Array.isArray(note.knowledge_points)
+        ? note.knowledge_points
+        : [note.knowledge_points])
       : ["未分类"];
     kps.forEach(kp => {
       const key = kp.toString();
@@ -227,127 +222,216 @@ function renderKaoyanDashboard() {
   } else {
     dv.paragraph("> [!INFO] 暂无错题记录。🎉");
   }
+}
 
-  // --- 模块 4: 今日待复习清单 ---
-  if (reviewToday.length > 0) {
-    dv.header(3, "⏰ 今日待复习清单");
-    dv.table(
-      ["待办项", "类型", "来源", "核心知识点/方法"],
-      reviewToday.map(p => {
-        const typeDisplay = p.type === "例题" ? "🔬 例题" : "🔥 错题";
-        const knowledgeDisplay = p.type === "例题"
-          ? (p.method_exemplified || p.core_method || "N/A")
-          : processKnowledgePoints(p.knowledge_points);
-        return [p.file.link, typeDisplay, p.source || "N/A", knowledgeDisplay];
-      })
-    );
+// 模块 4: 今日待复习清单
+function renderModule4_TodayReview(reviewToday) {
+  dv.header(3, "⏰ 今日待复习清单");
+  if (reviewToday.length === 0) {
+    dv.paragraph("> [!INFO] 今日无到期复习任务。请继续保持。");
+    return;
   }
+  dv.table(
+    ["待办项", "类型", "来源", "核心知识点/方法"],
+    reviewToday.map(p => {
+      const typeDisplay = p.type === "例题" ? "🔬 例题" : "🔥 错题";
+      const knowledgeDisplay = p.type === "例题"
+        ? (p.method_exemplified || p.core_method || "N/A")
+        : processKnowledgePoints(p.knowledge_points);
+      return [p.file.link, typeDisplay, p.source || "N/A", knowledgeDisplay];
+    })
+  );
+}
 
-  // --- 模块 5: 遗忘预警清单 ---
-  if (staleItems.length > 0) {
-    dv.header(3, "🧠 遗忘预警清单");
-    dv.table(
-      ["预警项 (最后复习)", "类型", "来源", "核心知识点/方法"],
-      staleItems.map(p => {
-        const typeDisplay = p.type === "例题" ? "🔬 例题" : "🔥 错题";
-        const knowledgeDisplay = p.type === "例题"
-          ? (p.method_exemplified || "N/A")
-          : processKnowledgePoints(p.knowledge_points);
-        return [
-          `${p.file.link}<br><span class="stale-date">${formatDate(getLastReviewDate(p))}</span>`,
-          typeDisplay,
-          p.source || "N/A",
-          knowledgeDisplay
-        ];
-      })
-    );
+// 模块 5: 遗忘预警清单
+function renderModule5_StaleAlerts(staleItems) {
+  dv.header(3, "🧠 遗忘预警清单");
+  if (staleItems.length === 0) {
+    dv.paragraph("> [!INFO] 暂无超过 30 天未复习的条目。请继续保持。");
+    return;
   }
+  dv.table(
+    ["预警项 (最后复习)", "类型", "来源", "核心知识点/方法"],
+    staleItems.map(p => {
+      const typeDisplay = p.type === "例题" ? "🔬 例题" : "🔥 错题";
+      const knowledgeDisplay = p.type === "例题"
+        ? (p.method_exemplified || "N/A")
+        : processKnowledgePoints(p.knowledge_points);
+      return [
+        `${p.file.link}<br><span class="stale-date">${formatDate(getLastReviewDate(p))}</span>`,
+        typeDisplay,
+        p.source || "N/A",
+        knowledgeDisplay
+      ];
+    })
+  );
+}
 
-  // --- 模块 6: 高价值解法模型库 ---
+// 模块 6: 高价值解法模型库
+function renderModule6_MasteredExemplars(allExemplars) {
+  dv.header(3, "🏆 高价值解法模型库");
   const masteredExemplars = allExemplars.where(p =>
     p.status?.trim() === "已建模" || p.status?.trim() === "可迁移"
   );
-  if (masteredExemplars.length > 0) {
-    dv.header(3, "🏆 高价值解法模型库");
-    dv.paragraph("> [!SUCCESS] 这是你已经建立的解法模型库。定期回顾，能将解题模式内化为本能。");
-    dv.table(
-      ["高价值模型 (例题)", "所属章节", "核心方法", "重要性"],
-      masteredExemplars
-        .sort(p => p.importance, 'desc')
-        .map(p => [
-          p.file.link,
-          extractChapterName(p.chapter) || "未分类",
-          p.method_exemplified || "未关联",
-          p.importance ? "🔥".repeat(p.importance) : "未评级"
-        ])
-    );
+  if (masteredExemplars.length === 0) {
+    dv.paragraph("> [!INFO] 暂无已建模的解法。多剖析例题，建立自己的模型库。");
+    return;
   }
+  dv.paragraph(
+    "> [!SUCCESS] 这是你已经建立的解法模型库。定期回顾，能将解题模式内化为本能。"
+  );
+  dv.table(
+    ["高价值模型 (例题)", "所属章节", "核心方法", "重要性"],
+    masteredExemplars
+      .sort(p => p.importance, 'desc')
+      .map(p => [
+        p.file.link,
+        extractChapterName(p.chapter) || "未分类",
+        p.method_exemplified || "未关联",
+        p.importance ? "🔥".repeat(p.importance) : "未评级"
+      ])
+  );
+}
 
-  // --- 模块 7: 待巩固核心方法清单 ---
+// 模块 7: 待巩固核心方法清单
+function renderModule7_CoreMethods(allPages) {
+  dv.header(3, "🧠 待巩固核心方法清单");
   const methods = allPages
-    .where(p => p.type === "知识枢纽" && p.mastery && p.mastery !== "熟练应用" && p.mastery !== "炉火纯青")
+    .where(p =>
+      p.type === "知识枢纽"
+      && p.mastery
+      && p.mastery !== "熟练应用"
+      && p.mastery !== "炉火纯青"
+    )
     .sort(p => p.mastery);
-  if (methods.length > 0) {
-    dv.header(3, "🧠 待巩固核心方法清单");
-    dv.table(
-      ["核心方法", "掌握程度", "所属章节", "上次复习"],
-      methods.map(m => [m.file.link, m.mastery, m.chapter, formatDate(m.last_reviewed)])
-    );
+  if (methods.length === 0) {
+    dv.paragraph("> [!INFO] 所有核心方法均已熟练。请继续保持。");
+    return;
   }
+  dv.table(
+    ["核心方法", "掌握程度", "所属章节", "上次复习"],
+    methods.map(m => [m.file.link, m.mastery, m.chapter, formatDate(m.last_reviewed)])
+  );
+}
 
-  // --- 模块 8: 高频考点方法论 ---
+// 模块 8: 高频考点方法论
+function renderModule8_MethodologyHubs(allPages, allActionableItems) {
+  dv.header(3, "👑 高频考点方法论");
   const hubPages = allPages.where(p => p.type === "知识枢纽");
-  if (hubPages.length > 0) {
-    dv.header(3, "👑 高频考点方法论");
-    const linkedPages = allActionableItems.where(p => p.knowledge_points || p.method_exemplified);
-    const hubData = hubPages
-      .map(hub => {
-        const hubPath = hub.file.link.path;
-        const count = linkedPages.where(p =>
-          (p.knowledge_points && dv.array(p.knowledge_points).some(kp => kp.path === hubPath))
-          || (p.method_exemplified && p.method_exemplified.path === hubPath)
-        ).length;
-        return { link: hub.file.link, count: count };
-      })
-      .sort((a, b) => b.count - a.count)
-      .limit(10);
-    dv.table(
-      ["方法论枢纽", "关联题目/例题数"],
-      hubData.map(h => [h.link, h.count])
-    );
+  if (hubPages.length === 0) {
+    dv.paragraph("> [!INFO] 暂无高频考点方法论数据。请检查知识枢纽的关联情况。");
+    return;
   }
+  const linkedPages = allActionableItems.where(p => p.knowledge_points || p.method_exemplified);
+  const hubData = hubPages
+    .map(hub => {
+      const hubPath = hub.file.link.path;
+      const count = linkedPages.where(p =>
+        (p.knowledge_points && dv.array(p.knowledge_points).some(kp => kp.path === hubPath))
+        || (p.method_exemplified && p.method_exemplified.path === hubPath)
+      ).length;
+      return { link: hub.file.link, count: count };
+    })
+    .sort((a, b) => b.count - a.count)
+    .limit(10);
+  dv.table(
+    ["方法论枢纽", "关联题目/例题数"],
+    hubData.map(h => [h.link, h.count])
+  );
+}
 
-  // --- 模块 9: 待精通战术卡片 ---
+// 模块 9: 待精通战术卡片
+function renderModule9_TacticCards(allPages) {
+  dv.header(3, "⚔️ 待精通战术卡片");
   const tactics = allPages
     .where(p => p.type === "战术卡片" && p.status && p.status !== "实战检验")
     .sort(p => p.status);
-  if (tactics.length > 0) {
-    dv.header(3, "⚔️ 待精通战术卡片");
-    dv.paragraph("> [!TIP] 这些是你考场快速决策的解题套路，多练才能熟练。");
-    dv.table(
-      ["战术主题", "状态", "所属知识枢纽"],
-      tactics.map(t => [t.file.link, t.status, t.parent_hub || "未关联"])
-    );
+  if (tactics.length === 0) {
+    dv.paragraph("> [!INFO] 所有战术卡片已通过实战检验。请继续保持。");
+    return;
   }
+  dv.paragraph("> [!TIP] 这些是你考场快速决策的解题套路，多练才能熟练。");
+  dv.table(
+    ["战术主题", "状态", "所属知识枢纽"],
+    tactics.map(t => [t.file.link, t.status, t.parent_hub || "未关联"])
+  );
+}
 
-  // --- 模块 10: 待精炼深度解析 ---
+// 模块 10: 待精炼深度解析
+function renderModule10_DeepAnalysis(allPages) {
+  dv.header(3, "💎 待精炼深度解析");
   const analyses = allPages
     .where(p => p.type === "深度解析" && p.mastery && p.mastery !== "可迁移")
     .sort(p => p.last_reviewed, 'asc');
-  if (analyses.length > 0) {
-    dv.header(3, "💎 待精炼深度解析");
-    dv.paragraph("> [!TIP] 这些是你知识体系中的核心难点，持续打磨会有高回报。");
-    dv.table(
-      ["深度解析主题", "掌握程度", "考频", "所属枢纽", "上次复习"],
-      analyses.map(a => [
-        a.file.link,
-        a.mastery,
-        a.exam_frequency || "未评估",
-        a.parent_hub || "未关联",
-        formatDate(a.last_reviewed)
-      ])
-    );
+  if (analyses.length === 0) {
+    dv.paragraph("> [!INFO] 所有深度解析已完成精炼。请继续保持。");
+    return;
   }
+  dv.paragraph("> [!TIP] 这些是你知识体系中的核心难点，持续打磨会有高回报。");
+  dv.table(
+    ["深度解析主题", "掌握程度", "考频", "所属枢纽", "上次复习"],
+    analyses.map(a => [
+      a.file.link,
+      a.mastery,
+      a.exam_frequency || "未评估",
+      a.parent_hub || "未关联",
+      formatDate(a.last_reviewed)
+    ])
+  );
+}
+
+// ===================================================================
+// 核心渲染
+// ===================================================================
+function renderKaoyanDashboard() {
+  const today = dv.date('today');
+
+  // 阶段二：仅扫描 2 次 vault
+  const allPages = dv.pages();
+  const mathPages = allPages.where(p => p.file.path.startsWith(CONFIG.mathNotesFolder));
+
+  const allActionableItems = mathPages.where(p =>
+    p.type?.trim() === "题目" || p.type?.trim() === "例题"
+  );
+  const allProblems = allActionableItems.where(p => p.type?.trim() === "题目");
+  const allMistakes = allProblems.where(p => p.status?.trim() === "错题");
+  const allExemplars = allActionableItems.where(p => p.type?.trim() === "例题");
+  const pendingExemplars = allExemplars.where(p => p.status?.trim() === "待剖析");
+  const mistakeCount = allMistakes.length;
+  const pendingExemplarCount = pendingExemplars.length;
+
+  // 今日待复习计算
+  const reviewMistakes = allMistakes.where(p => {
+    const rd = dv.date(p.review_date);
+    return rd && rd <= today;
+  });
+  const reviewToday = reviewMistakes.concat(pendingExemplars);
+
+  // 阶段四：遗忘预警基于 last_reviewed / review_date
+  const staleMistakes = allMistakes.where(p => {
+    const lastReviewed = getLastReviewDate(p);
+    if (!lastReviewed) return false;
+    return today - lastReviewed > dv.duration(CONFIG.staleAlertDays + " days");
+  });
+  const staleExemplars = pendingExemplars.where(p => {
+    const lastReviewed = getLastReviewDate(p);
+    if (!lastReviewed) return false;
+    return today - lastReviewed > dv.duration(CONFIG.staleAlertDays + " days");
+  });
+  const staleItems = staleMistakes.concat(staleExemplars);
+
+  safeRender('顶部健康条', renderHealthBarAndTitle, mistakeCount);
+  safeRender('数据卡片', renderDataCards, mistakeCount, pendingExemplarCount, reviewToday, staleItems);
+  safeRender('模块1-章节掌握度', renderModule1_ChapterMastery, allProblems);
+  safeRender('模块2-待剖析例题', renderModule2_PendingExemplars, pendingExemplars);
+  safeRender('模块3-错题本', renderModule3_MistakesByTopic, allMistakes);
+  safeRender('模块4-今日待复习', renderModule4_TodayReview, reviewToday);
+  safeRender('模块5-遗忘预警', renderModule5_StaleAlerts, staleItems);
+  safeRender('模块6-解法模型库', renderModule6_MasteredExemplars, allExemplars);
+  safeRender('模块7-核心方法清单', renderModule7_CoreMethods, allPages);
+  safeRender('模块8-高频考点方法论', renderModule8_MethodologyHubs, allPages, allActionableItems);
+  safeRender('模块9-战术卡片', renderModule9_TacticCards, allPages);
+  safeRender('模块10-深度解析', renderModule10_DeepAnalysis, allPages);
 }
 
 // --- 渲染与样式 ---
