@@ -98,7 +98,7 @@ function renderKaoyanDashboard() {
   // 模块 2: 待剖析经典例题清单
   if (pendingExemplars.length > 0) {
     dv.header(3, "🔬 待剖析经典例题清单");
-    dv.paragraph("> [!TIP] 这些是您捕获的、尚未完全吸收的"胜利范式"，请尽快完成建模！");
+    dv.paragraph("> [!TIP] 这些是您捕获的、尚未完全吸收的「胜利范式」，请尽快完成建模！");
     dv.table(["例题", "来源", "待剖析核心方法"], pendingExemplars.sort(p => p.file.cday, 'asc').map(p => [
       p.file.link,
       p.source || "N/A",
@@ -136,7 +136,7 @@ function renderKaoyanDashboard() {
   const masteredExemplars = allExemplars.where(p => p.status?.trim() === "已建模" || p.status?.trim() === "可迁移");
   if (masteredExemplars.length > 0) {
     dv.header(3, "🏆 高价值解法模型库");
-    dv.paragraph("> [!SUCCESS] 这是您已攻克的"胜利范式"功勋墙。定期回顾，能将解题模式内化为战斗本能。");
+    dv.paragraph("> [!SUCCESS] 这是您已攻克的「胜利范式」功勋墙。定期回顾，能将解题模式内化为战斗本能。");
     dv.table(
       ["高价值模型 (例题)", "所属章节", "核心方法", "重要性"],
       masteredExemplars
@@ -160,11 +160,11 @@ function renderKaoyanDashboard() {
 
   // 模块 9: 待精通战术卡片
   const tactics = dv.pages().where(p => p.type === "战术卡片" && p.status && p.status !== "实战检验").sort(p => p.status);
-  if (tactics.length > 0) { dv.header(3, "⚔️ 待精通战术卡片"); dv.paragraph("> [!TIP] 这些是您在考场上进行快速决策的"肌肉记忆"，反复训练，方能克敌制胜！"); dv.table(["战术主题", "状态", "所属知识枢纽"], tactics.map(t => [t.file.link, t.status, t.parent_hub || "未关联"])); }
+  if (tactics.length > 0) { dv.header(3, "⚔️ 待精通战术卡片"); dv.paragraph("> [!TIP] 这些是您在考场上进行快速决策的「肌肉记忆」，反复训练，方能克敌制胜！"); dv.table(["战术主题", "状态", "所属知识枢纽"], tactics.map(t => [t.file.link, t.status, t.parent_hub || "未关联"])); }
 
   // 模块 10: 待精炼深度解析
   const analyses = dv.pages().where(p => p.type === "深度解析" && p.mastery && p.mastery !== "可迁移").sort(p => p.last_reviewed, 'asc');
-  if (analyses.length > 0) { dv.header(3, "💎 待精炼深度解析"); dv.paragraph("> [!TIP] 这些是您知识体系中的"皇冠明珠"，持续打磨它们，将带来最高的回报！"); dv.table(["深度解析主题", "掌握程度", "考频", "所属枢纽", "上次复习"], analyses.map(a => [a.file.link, a.mastery, a.exam_frequency || "未评估", a.parent_hub || "未关联", formatDate(a.last_reviewed)])); }
+  if (analyses.length > 0) { dv.header(3, "💎 待精炼深度解析"); dv.paragraph("> [!TIP] 这些是您知识体系中的「皇冠明珠」，持续打磨它们，将带来最高的回报！"); dv.table(["深度解析主题", "掌握程度", "考频", "所属枢纽", "上次复习"], analyses.map(a => [a.file.link, a.mastery, a.exam_frequency || "未评估", a.parent_hub || "未关联", formatDate(a.last_reviewed)])); }
 }
 
 // --- 渲染与样式 ---
