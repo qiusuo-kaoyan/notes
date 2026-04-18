@@ -51,14 +51,23 @@ git clone git@github.com:你的用户名/notes.git
 4. 如果出现插件加载提示，选择 **"启用社区插件"**
 
 ### 推荐安装的插件
-母舰大量使用了以下插件，建议安装：
-- **Dataview** — 动态看板、查询
-- **Templater** — 模板自动化
-- **Math Booster** — 公式增强
-- **Excalidraw** — 手绘图解
-- **Kanban** — 任务看板
+母舰的仪表盘、看板和模板依赖以下核心插件，建议安装：
 
-> 插件文件不在本仓库中（体积太大），请通过 Obsidian 社区插件市场搜索安装。安装后，配置会自动从 `.obsidian/community-plugins.json` 中读取。
+**核心功能（缺省会大量看板/模板失效）：**
+- **Dataview** — 127+ 份笔记的动态看板与查询引擎
+- **Templater** — PZ 系列模板自动填充日期、元数据
+- **Obsidian Kanban** — 拖拽任务看板
+- **PDF++** — PDF 内嵌阅读与批注
+- **Advanced Canvas** — Canvas 白板增强
+
+**增强体验（可删不影响核心功能）：**
+- **Notebook Navigator** — 笔记本目录快速导航
+- **Easy Typing** — 中文输入自动空格、符号优化
+- **Markmind** — 思维导图模式
+- **Calendar** — 日记日期联动日历
+- **Style Settings** + **Contextual Typography** — 主题微调 + 阅读宽度自适应
+
+> 插件文件不在本仓库中（已 `.gitignore` 排除），请通过 Obsidian 社区插件市场搜索安装。安装后，启用列表会自动从 `.obsidian/community-plugins.json` 中读取，无需手动逐个配置。
 
 ---
 
