@@ -2,6 +2,8 @@
 
 感谢你对「求索号」感兴趣！本指南将手把手教你如何 Fork 母舰、本地编辑、并最终通过 Pull Request 将你的智慧汇入母舰。
 
+> 📜 **想直接了解「舰长」认证规则？** 请先阅读 [`CONTRIBUTING-CAPTAIN-CHARTER.md`](./CONTRIBUTING-CAPTAIN-CHARTER.md)——完整的三层身份体系、晋升路径与审核标准。
+
 ---
 
 ## 🚦 开始前准备
@@ -176,6 +178,8 @@ gen2: Math/数列极限 - 补充递推法示例与易错点
 | **Contributor** | 1 个以上被合并的 PR | 被邀请加入 Org Members |
 | **Captain Gen-N** | 成功上岸 + 3 个以上被合并的 PR | Maintainer 权限，Review PR，发布 Release |
 | **Owner** | 第一代舰长 + 核心继任者 | Admin 权限，管理 Org |
+
+> 📜 **详细规则**：以上仅为速查表，完整的身份定义、审核标准、权限矩阵与 FAQ 请参阅 [`CONTRIBUTING-CAPTAIN-CHARTER.md`](./CONTRIBUTING-CAPTAIN-CHARTER.md)。
 
 ---
 
