@@ -4,18 +4,47 @@
 
 ---
 
-## 快速安装
+## 插件该放在哪里？
+
+打开你下载的笔记文件夹（Vault），你会看到这个结构：
+
+```
+你的Vault/
+├── 0. 指挥中心/
+├── 1. Math/
+├── 2. 专业课/
+├── ...
+└── .obsidian/          ← 插件要放在这里面
+    ├── plugins/        ← 把插件文件夹拖进这里
+    │   ├── dataview/
+    │   ├── templater-obsidian/
+    │   └── ...
+    ├── themes/
+    └── ...
+```
+
+**一句话：所有插件文件夹 → 放进 `.obsidian/plugins/` 里。**
+
+---
+
+## 快速安装（推荐用脚本，不会错）
 
 ### Windows
 
+1. 解压 `qiusuo-kaoyan-v26.4-plugins-only.zip`
+2. 打开 PowerShell，进入解压后的文件夹
+3. 运行：
+
 ```powershell
-.\install-plugins.ps1 -VaultPath "C:\Users\你的用户名\Documents\你的Vault路径"
+.\install-plugins.ps1 -VaultPath "C:\Users\你的用户名\Documents\qiusuo-notes"
 ```
+
+> 💡 不知道 Vault 路径？在 Obsidian 里按 `Ctrl+Shift+I`，控制台输入 `app.vault.adapter.basePath` 回车，显示的就是。
 
 ### macOS / Linux
 
 ```bash
-bash install-plugins.sh ~/Documents/你的Vault路径
+bash install-plugins.sh ~/Documents/qiusuo-notes
 ```
 
 ---
@@ -67,14 +96,30 @@ bash install-plugins.sh ~/Documents/你的Vault路径
 
 ---
 
-## 手动安装（不用脚本）
+## 手动安装（不用脚本，三步搞定）
 
-如果你不想用脚本，可以手动复制：
+**第一步**：关闭 Obsidian（必须！不然文件会被锁定）
 
-1. 关闭 Obsidian
-2. 将 `obsidian-plugins/` 下的所有文件夹复制到你的 Vault 的 `.obsidian/plugins/` 目录中
-3. 重新打开 Obsidian
-4. 在「设置 → 社区插件」中启用需要的插件
+**第二步**：找到你的 Vault 文件夹，进入 `.obsidian/plugins/`
+- Windows: `C:\Users\用户名\Documents\你的Vault\.obsidian\plugins\`
+- macOS: `~/Documents/你的Vault/.obsidian/plugins/`
+
+**第三步**：把 `obsidian-plugins/` 里的所有文件夹复制过去
+
+完成后重新打开 Obsidian，进入「设置 → 社区插件」，关闭安全模式，然后启用插件。
+
+---
+
+## 常见问题
+
+**Q: 找不到 `.obsidian` 文件夹？**
+A: `.obsidian` 是隐藏文件夹。在 Windows 文件管理器中点击「查看 → 显示隐藏的项目」；在 macOS 中按 `Cmd+Shift+.` 显示隐藏文件。
+
+**Q: `.obsidian/plugins/` 文件夹不存在？**
+A: 正常，说明你还没安装过社区插件。直接新建一个 `plugins` 文件夹即可。
+
+**Q: 插件拖进去后 Obsidian 里看不到？**
+A: 检查三点：① Obsidian 是否已关闭再重新打开 ② 文件夹是否放在了 `.obsidian/plugins/` 下（不是 Vault 根目录）③ 是否在「设置 → 社区插件」里关闭了安全模式并启用了插件。
 
 ---
 
