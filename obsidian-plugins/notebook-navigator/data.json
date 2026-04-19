@@ -1,0 +1,614 @@
+{
+  "vaultProfiles": [
+    {
+      "id": "default",
+      "name": "Default",
+      "fileVisibility": "supported",
+      "propertyKeys": [],
+      "hiddenFolders": [
+        "/3. English/0. 方法论/阅读理解/B 站--晶婷老师/补充/语法课/pciture",
+        "/3. English/0. 方法论/作文/attachment",
+        "/3. English/1. 语料积累册/作文/attachment",
+        "/00. 总框架/规划/数学/Picture",
+        "/00. 总框架/规划/英语/Picture",
+        "/00. 总框架/规划/政治/Picture",
+        "/00. 总框架/规划/总纲/B 站--泪眼汪汪w/PictureSet",
+        "/1. Math/1. 基础阶段/660/高等数学/Picture Set",
+        "/1. Math/2. 强化阶段/0. 高等数学/习题册/张宇 1000/Picture",
+        "/1. Math/3. 真题阶段/二周目--09-25真题卷/阶段1--回顾阶段09-15/attachment",
+        "/1. Math/3. 真题阶段/典型例题汇总/3. 概率论/attachment",
+        "/1. Math/3. 真题阶段/典型例题汇总/2. 线代/attachment",
+        "/1. Math/3. 真题阶段/典型例题汇总/1. 高数/attachment",
+        "/1. Math/2. 强化阶段/4. 每日一题/Pic",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/Pic",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 0 讲--导学/Picture",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 1 讲-函数极限与连续/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 2 讲-数列极限/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 3 讲-一元函数微分学的概念/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 4 讲-一元函数微分学的计算/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 8 讲-一元函数积分学的概念与性质/Picture",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 9 讲-一元函数积分学的计算/Pic",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 10 讲-一元函数积分学的应用(一)-几何应用/Pic",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 11 讲-一元函数积分学的应用(二)-积分等式与不等式/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 13 讲-多元函数微分学/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 14 讲-二重积分/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 16 讲-无穷级数/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 17 讲-多元函数积分学的预备知识/attachment",
+        "/1. Math/2. 强化阶段/0. 高等数学/知识点整理/第 18 讲-多元函数积分学/Pic"
+      ],
+      "hiddenTags": [],
+      "hiddenFileNames": [],
+      "hiddenFileTags": [],
+      "hiddenFileProperties": [],
+      "navigationBanner": null,
+      "periodicNotesFolder": "",
+      "shortcuts": [
+        {
+          "type": "note",
+          "path": "CONTRIBUTING.md"
+        },
+        {
+          "type": "note",
+          "path": "0. 指挥中心/🗺️ 求索号快速导航.md"
+        },
+        {
+          "type": "note",
+          "path": "1. Math/2. 强化阶段/0. 高等数学/知识枢纽：高等数学.md"
+        },
+        {
+          "type": "note",
+          "path": "3. English/1. 语料积累册/作文/大作文/英语一大作文战略数据库.md"
+        },
+        {
+          "type": "note",
+          "path": "1. Math/1. 基础阶段/660/0. 660重点题目.md"
+        },
+        {
+          "type": "note",
+          "path": "0. 指挥中心/复习导航仪/🧭星图仪表盘.md"
+        },
+        {
+          "type": "note",
+          "path": "0. 指挥中心/复习导航仪/数学任务看板.md"
+        },
+        {
+          "type": "folder",
+          "path": "0. 指挥中心/使用说明"
+        }
+      ],
+      "navRainbow": {
+        "mode": "foreground",
+        "balanceHueLuminance": true,
+        "separateThemeColors": false,
+        "shortcuts": {
+          "enabled": true,
+          "firstColor": "#ef4444",
+          "lastColor": "#8b5cf6",
+          "darkFirstColor": "#ef4444",
+          "darkLastColor": "#8b5cf6",
+          "transitionStyle": "rgb"
+        },
+        "recent": {
+          "enabled": true,
+          "firstColor": "#ef4444",
+          "lastColor": "#8b5cf6",
+          "darkFirstColor": "#ef4444",
+          "darkLastColor": "#8b5cf6",
+          "transitionStyle": "rgb"
+        },
+        "folders": {
+          "enabled": true,
+          "firstColor": "#ef4444",
+          "lastColor": "#8b5cf6",
+          "darkFirstColor": "#fb7185",
+          "darkLastColor": "#c084fc",
+          "transitionStyle": "hue",
+          "scope": "root"
+        },
+        "tags": {
+          "enabled": true,
+          "firstColor": "#ef4444",
+          "lastColor": "#8b5cf6",
+          "darkFirstColor": "#fb7185",
+          "darkLastColor": "#c084fc",
+          "transitionStyle": "hue",
+          "scope": "root"
+        },
+        "properties": {
+          "enabled": true,
+          "firstColor": "#ef4444",
+          "lastColor": "#8b5cf6",
+          "darkFirstColor": "#fb7185",
+          "darkLastColor": "#c084fc",
+          "transitionStyle": "hue",
+          "scope": "root"
+        }
+      }
+    }
+  ],
+  "vaultTitle": "navigation",
+  "syncModes": {
+    "vaultProfile": "local",
+    "homepage": "synced",
+    "folderSortOrder": "synced",
+    "tagSortOrder": "local",
+    "propertySortOrder": "synced",
+    "includeDescendantNotes": "local",
+    "useFloatingToolbars": "synced",
+    "dualPane": "local",
+    "dualPaneOrientation": "local",
+    "paneTransitionDuration": "local",
+    "toolbarVisibility": "local",
+    "pinNavigationBanner": "synced",
+    "navIndent": "local",
+    "navItemHeight": "local",
+    "navItemHeightScaleText": "local",
+    "calendarPlacement": "synced",
+    "calendarLeftPlacement": "synced",
+    "calendarWeeksToShow": "local",
+    "compactItemHeight": "local",
+    "compactItemHeightScaleText": "local",
+    "featureImageSize": "synced",
+    "featureImagePixelSize": "synced",
+    "uiScale": "local"
+  },
+  "createNewNotesInNewTab": false,
+  "autoRevealActiveFile": true,
+  "autoRevealShortestPath": true,
+  "autoRevealIgnoreRightSidebar": true,
+  "autoRevealIgnoreOtherWindows": true,
+  "multiSelectModifier": "cmdCtrl",
+  "enterToOpenFiles": false,
+  "shiftEnterOpenContext": "tab",
+  "cmdCtrlEnterOpenContext": "split",
+  "mouseBackForwardAction": "history",
+  "startView": "files",
+  "showInfoButtons": true,
+  "homepage": {
+    "source": "none",
+    "file": null
+  },
+  "showTooltips": false,
+  "showTooltipPath": true,
+  "desktopBackground": "separate",
+  "useFloatingToolbars": true,
+  "interfaceIcons": {},
+  "colorIconOnly": false,
+  "dateFormat": "MMM D, YYYY",
+  "timeFormat": "h:mm a",
+  "calendarTemplateFolder": "",
+  "confirmBeforeDelete": true,
+  "deleteAttachments": "ask",
+  "moveFileConflicts": "ask",
+  "externalIconProviders": {},
+  "checkForUpdatesOnStart": true,
+  "pinNavigationBanner": true,
+  "showNoteCount": true,
+  "separateNoteCounts": true,
+  "showIndentGuides": false,
+  "rootLevelSpacing": 0,
+  "collapseBehavior": "all",
+  "smartCollapse": true,
+  "autoSelectFirstFileOnFocusChange": false,
+  "autoExpandNavItems": false,
+  "springLoadedFolders": true,
+  "springLoadedFoldersInitialDelay": 0.1,
+  "springLoadedFoldersSubsequentDelay": 0.1,
+  "showSectionIcons": true,
+  "showShortcuts": true,
+  "shortcutBadgeDisplay": "index",
+  "skipAutoScroll": false,
+  "showRecentNotes": true,
+  "hideRecentNotes": "none",
+  "pinRecentNotesWithShortcuts": false,
+  "recentNotesCount": 5,
+  "showFolderIcons": true,
+  "showRootFolder": true,
+  "inheritFolderColors": false,
+  "folderSortOrder": "alpha-asc",
+  "enableFolderNotes": false,
+  "folderNoteType": "markdown",
+  "folderNoteName": "",
+  "folderNoteNamePattern": "",
+  "folderNoteTemplate": null,
+  "enableFolderNoteLinks": true,
+  "hideFolderNoteInList": true,
+  "pinCreatedFolderNote": false,
+  "openFolderNotesInNewTab": false,
+  "showTags": true,
+  "showTagIcons": true,
+  "showAllTagsFolder": true,
+  "showUntagged": false,
+  "scopeTagsToCurrentContext": false,
+  "inheritTagColors": true,
+  "keepEmptyTagsProperty": false,
+  "showProperties": true,
+  "showPropertyIcons": true,
+  "inheritPropertyColors": true,
+  "propertySortOrder": "alpha-asc",
+  "showAllPropertiesFolder": true,
+  "scopePropertiesToCurrentContext": false,
+  "defaultListMode": "standard",
+  "defaultFolderSort": "filename-asc",
+  "propertySortKey": "",
+  "propertySortSecondary": "filename",
+  "revealFileOnListChanges": true,
+  "listPaneTitle": "list",
+  "noteGrouping": "folder",
+  "showSelectedNavigationPills": true,
+  "filterPinnedByFolder": false,
+  "showPinnedGroupHeader": true,
+  "showPinnedIcon": true,
+  "optimizeNoteHeight": true,
+  "showQuickActions": true,
+  "quickActionRevealInFolder": true,
+  "quickActionAddTag": true,
+  "quickActionAddToShortcuts": true,
+  "quickActionPinNote": true,
+  "quickActionOpenInNewTab": true,
+  "useFrontmatterMetadata": true,
+  "frontmatterIconField": "icon",
+  "frontmatterColorField": "color",
+  "frontmatterBackgroundField": "background",
+  "frontmatterNameField": "",
+  "frontmatterCreatedField": "",
+  "frontmatterModifiedField": "",
+  "frontmatterDateFormat": "",
+  "showFileIconUnfinishedTask": false,
+  "showFileBackgroundUnfinishedTask": false,
+  "unfinishedTaskBackgroundColor": "#ef000050",
+  "showFileIcons": true,
+  "showFilenameMatchIcons": false,
+  "fileNameIconMap": {},
+  "showCategoryIcons": false,
+  "fileTypeIconMap": {},
+  "fileNameRows": 1,
+  "showFilePreview": true,
+  "skipHeadingsInPreview": true,
+  "skipCodeBlocksInPreview": true,
+  "stripHtmlInPreview": true,
+  "stripLatexInPreview": true,
+  "previewRows": 2,
+  "previewProperties": [],
+  "previewPropertiesFallback": true,
+  "showFeatureImage": true,
+  "featureImageProperties": [
+    "thumbnail",
+    "featureResized",
+    "feature"
+  ],
+  "featureImageExcludeProperties": [],
+  "featureImageSize": "64",
+  "featureImagePixelSize": "256",
+  "forceSquareFeatureImage": true,
+  "downloadExternalFeatureImages": true,
+  "showFileTags": true,
+  "colorFileTags": true,
+  "prioritizeColoredFileTags": true,
+  "showFileTagAncestors": true,
+  "showFileTagsInCompactMode": false,
+  "showFileProperties": true,
+  "colorFileProperties": true,
+  "prioritizeColoredFileProperties": true,
+  "showFilePropertiesInCompactMode": false,
+  "showPropertiesOnSeparateRows": false,
+  "enablePropertyInternalLinks": true,
+  "enablePropertyExternalLinks": true,
+  "notePropertyType": "none",
+  "showFileDate": true,
+  "alphabeticalDateMode": "modified",
+  "showParentFolder": true,
+  "parentFolderClickRevealsFile": false,
+  "showParentFolderColor": false,
+  "showParentFolderIcon": false,
+  "calendarEnabled": false,
+  "calendarPlacement": "left-sidebar",
+  "calendarConfirmBeforeCreate": true,
+  "calendarLocale": "system-default",
+  "calendarWeekendDays": "sat-sun",
+  "calendarMonthHeadingFormat": "full",
+  "calendarHighlightToday": true,
+  "calendarShowFeatureImage": true,
+  "calendarMonthHighlights": {},
+  "calendarShowWeekNumber": false,
+  "calendarShowQuarter": false,
+  "calendarShowYearCalendar": true,
+  "calendarLeftPlacement": "navigation",
+  "calendarIntegrationMode": "notebook-navigator",
+  "calendarCustomFilePattern": "YYYY/YYYYMMDD",
+  "calendarCustomWeekPattern": "gggg/[W]ww",
+  "calendarCustomMonthPattern": "YYYY/YYYYMM",
+  "calendarCustomQuarterPattern": "YYYY/[Q]Q",
+  "calendarCustomYearPattern": "YYYY",
+  "calendarCustomFileTemplate": null,
+  "calendarCustomWeekTemplate": null,
+  "calendarCustomMonthTemplate": null,
+  "calendarCustomQuarterTemplate": null,
+  "calendarCustomYearTemplate": null,
+  "keyboardShortcuts": {
+    "pane:move-up": [
+      {
+        "key": "ArrowUp",
+        "modifiers": []
+      }
+    ],
+    "pane:move-down": [
+      {
+        "key": "ArrowDown",
+        "modifiers": []
+      }
+    ],
+    "pane:page-up": [
+      {
+        "key": "PageUp",
+        "modifiers": []
+      }
+    ],
+    "pane:page-down": [
+      {
+        "key": "PageDown",
+        "modifiers": []
+      }
+    ],
+    "pane:home": [
+      {
+        "key": "Home",
+        "modifiers": []
+      }
+    ],
+    "pane:end": [
+      {
+        "key": "End",
+        "modifiers": []
+      }
+    ],
+    "navigation:collapse-or-parent": [
+      {
+        "key": "ArrowLeft",
+        "modifiers": []
+      }
+    ],
+    "navigation:expand-or-focus-list": [
+      {
+        "key": "ArrowRight",
+        "modifiers": []
+      }
+    ],
+    "navigation:focus-list": [
+      {
+        "key": "Tab",
+        "modifiers": []
+      }
+    ],
+    "pane:delete-selected": [
+      {
+        "key": "Delete",
+        "modifiers": []
+      },
+      {
+        "key": "Backspace",
+        "modifiers": []
+      }
+    ],
+    "list:focus-navigation": [
+      {
+        "key": "ArrowLeft",
+        "modifiers": []
+      },
+      {
+        "key": "Tab",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "list:focus-editor": [
+      {
+        "key": "ArrowRight",
+        "modifiers": []
+      },
+      {
+        "key": "Tab",
+        "modifiers": []
+      }
+    ],
+    "list:select-all": [
+      {
+        "key": "A",
+        "modifiers": [
+          "Mod"
+        ]
+      }
+    ],
+    "list:extend-selection-up": [
+      {
+        "key": "ArrowUp",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "list:extend-selection-down": [
+      {
+        "key": "ArrowDown",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "list:range-to-start": [
+      {
+        "key": "Home",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "list:range-to-end": [
+      {
+        "key": "End",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "search:focus-list": [
+      {
+        "key": "Tab",
+        "modifiers": []
+      },
+      {
+        "key": "Enter",
+        "modifiers": []
+      }
+    ],
+    "search:focus-navigation": [
+      {
+        "key": "Tab",
+        "modifiers": [
+          "Shift"
+        ]
+      }
+    ],
+    "search:close": [
+      {
+        "key": "Escape",
+        "modifiers": []
+      }
+    ]
+  },
+  "customVaultName": "",
+  "pinnedNotes": {
+    "1. Math/3. 真题阶段/一周目--87-08真题真刷/87-08年真题问题汇总--只做高数.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "1. Math/2. 强化阶段/0. 高等数学/知识枢纽：高等数学.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "1. Math/2. 强化阶段/2. 概率论/没咋了强化/概率大纲.canvas": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "1. Math/2. 强化阶段/1. 线性代数/知识点整理/线代大纲.canvas": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "CONTRIBUTING.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "LICENSE.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "README.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "WORKFLOW.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "0. 指挥中心/🗺️ 求索号快速导航.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "3. English/1. 语料积累册/作文/大作文/英语一大作文战略数据库.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "1. Math/1. 基础阶段/660/0. 660重点题目.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "0. 指挥中心/复习导航仪/🧭星图仪表盘.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    },
+    "0. 指挥中心/复习导航仪/数学任务看板.md": {
+      "folder": true,
+      "tag": false,
+      "property": false
+    }
+  },
+  "fileIcons": {},
+  "fileColors": {},
+  "fileBackgroundColors": {},
+  "folderIcons": {},
+  "folderColors": {},
+  "folderBackgroundColors": {},
+  "folderSortOverrides": {},
+  "folderTreeSortOverrides": {},
+  "folderAppearances": {
+    "1. Math": {
+      "titleRows": 2,
+      "mode": "compact"
+    },
+    "2. 专业课": {
+      "mode": "compact"
+    },
+    "2. 专业课/强化阶段/1. 自动控制原理/简答题/第 3 章--线性系统的时域分析法": {
+      "mode": "compact"
+    },
+    "1. Math/1. 基础阶段": {
+      "mode": "compact"
+    }
+  },
+  "tagIcons": {},
+  "tagColors": {},
+  "tagBackgroundColors": {},
+  "tagSortOverrides": {},
+  "tagTreeSortOverrides": {},
+  "tagAppearances": {},
+  "propertyIcons": {},
+  "propertyColors": {},
+  "propertyBackgroundColors": {},
+  "propertySortOverrides": {},
+  "propertyTreeSortOverrides": {},
+  "propertyAppearances": {},
+  "virtualFolderColors": {},
+  "virtualFolderBackgroundColors": {},
+  "navigationSeparators": {},
+  "userColors": [
+    "#ffffff",
+    "#d9d9d9",
+    "#a6a6a6",
+    "#737373",
+    "#000000",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040",
+    "#404040"
+  ],
+  "lastShownVersion": "2.5.7",
+  "rootFolderOrder": [],
+  "rootTagOrder": [],
+  "rootPropertyOrder": [],
+  "iconizeFormat": false,
+  "useEmbeddedImageFallback": true
+}

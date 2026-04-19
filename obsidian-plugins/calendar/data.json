@@ -1,0 +1,10 @@
+{
+  "shouldConfirmBeforeCreate": true,
+  "weekStart": "locale",
+  "wordsPerDot": 250,
+  "showWeeklyNote": true,
+  "weeklyNoteFormat": "🌠 周度星航指挥室-YYYY年第WW周复盘",
+  "weeklyNoteTemplate": "Templates/Templater/PZ6-🌠周度星航指挥室元数据",
+  "weeklyNoteFolder": "5. 考研日记/周记",
+  "localeOverride": "system-default"
+}

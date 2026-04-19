@@ -1,0 +1,10 @@
+{
+    "id": "mathlinks",
+    "name": "MathLinks",
+    "version": "0.5.3",
+    "minAppVersion": "1.3.5",
+    "description": "在链接中渲染 MathJax",
+    "author": "zhaoshenzhai",
+    "authorUrl": "https://github.com/zhaoshenzhai/obsidian-mathlinks",
+    "isDesktopOnly": false
+}
