@@ -94,6 +94,16 @@
 
 更详细的图文教程见 👉 [onboarding 仓库](https://github.com/qiusuo-kaoyan/onboarding)
 
+## 🌟 星图档案馆
+
+如果你已经积累了某一科目或某一模块的完整备考笔记，欢迎投稿到 [**星图档案馆**](https://github.com/qiusuo-kaoyan/starlog-archive)：
+
+- 按科目分类归档（数学 / 英语 / 专业课）
+- 以压缩包形式投稿，经审核后发布 Release
+- 你的笔记将永久保存，供后来者参考
+
+详见 [星图档案馆投稿指南](https://github.com/qiusuo-kaoyan/starlog-archive/blob/main/CONTRIBUTING.md)。
+
 ## 🔄 舰长传承机制
 
 ```
